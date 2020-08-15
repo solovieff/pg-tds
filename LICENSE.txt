@@ -1,0 +1,3 @@
+WARNING !!!! All additional components and libraries are provided by their vendors free sources 'as is',
+and should be used with respect to their licenses.
+---

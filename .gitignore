@@ -1,0 +1,9 @@
+logs
+db
+backup
+
+*.pid
+*.pid.lock
+*.iml
+.idea
+

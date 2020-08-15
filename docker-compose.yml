@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    build: .
+    restart: always
+    container_name: "postgres"
+    volumes:
+      - ./db:/var/lib/postgresql/data/ # persist data even if container shuts down
+      - ./logs:/logs
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backup:/backup
+    ports:
+      - 5430:5432
+    networks:
+      - share-network
+    environment:
+      POSTGRES_PASSWORD: 1234
+      #below is not used and should  be set directly.
+      SQL_SERVER_USER: sqlserv_user
+      SQL_SERVER_PASSWORD: sqlserv_password
+      SQL_SERVER_HOST: 192.168.0.32
+      SQL_SERVER_PORT: 1433
+      SQL_SERVER_DB: db_name
+      SQL_SERVER_SCHEMA: sql_srv_schema_name
+    command: postgres -c logging_collector=on -c log_destination=stderr -c log_directory=../logs
+networks:
+  share-network:
